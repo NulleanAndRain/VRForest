@@ -1413,6 +1413,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1034163835944018325, guid: d27798887c8a7f44b8fab951867d8e9d,
+        type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000,
+        type: 0}
+    - target: {fileID: 1882247360733959693, guid: d27798887c8a7f44b8fab951867d8e9d,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: 2131802952369547664, guid: d27798887c8a7f44b8fab951867d8e9d,
         type: 3}
       propertyPath: m_RootOrder
@@ -1472,6 +1483,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FoxContainer
+      objectReference: {fileID: 0}
+    - target: {fileID: 3809896188492444892, guid: d27798887c8a7f44b8fab951867d8e9d,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3809896188492444892, guid: d27798887c8a7f44b8fab951867d8e9d,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3809896188492444892, guid: d27798887c8a7f44b8fab951867d8e9d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d27798887c8a7f44b8fab951867d8e9d, type: 3}
