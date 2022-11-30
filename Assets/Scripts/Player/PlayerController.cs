@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     const string xAxis = "Mouse X"; //Strings in direct code generate garbage, storing and re-using them creates no garbage
     const string yAxis = "Mouse Y";
     Vector3 noYAxis = new Vector3(1, 0, 1);
+    private Vector3 moveDir;
 
     // Start is called before the first frame update
     void Start()
@@ -28,8 +29,9 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    void FixedUpdate()
+    private void Update()
     {
+
         rotation.x += Input.GetAxis(xAxis) * sensitivity;
         rotation.y += Input.GetAxis(yAxis) * sensitivity;
         rotation.y = Mathf.Clamp(rotation.y, -yRotationLimit, yRotationLimit);
@@ -42,13 +44,18 @@ public class PlayerController : MonoBehaviour
             (_playerCamera.transform.forward * InputManager.vertical +
             _playerCamera.transform.right * InputManager.horizontal);
         dir.y = 0;
-        dir = dir.normalized;
+        moveDir = dir.normalized;
+    }
 
-        _rb.MovePosition(
-            transform.position +
-            dir *
-            _speed *
-            Time.deltaTime
-        );
+    void FixedUpdate()
+    {
+
+        if (InputManager.moveInput.magnitude >= 0.05f)
+            _rb.MovePosition(
+                transform.position +
+                moveDir *
+                _speed *
+                Time.deltaTime
+            );
     }
 }
