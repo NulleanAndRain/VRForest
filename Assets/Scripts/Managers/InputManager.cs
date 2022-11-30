@@ -38,5 +38,14 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    public static Vector3 moveInput => new Vector3(-vertical, 0, horizontal).normalized;
+    public static Vector3 moveInput
+    {
+        get
+        {
+            var i = OVRInput.Get(OVRInput.RawAxis2D.RThumbstick);
+            return new Vector3(-vertical + i.y, 0, horizontal + i.x).normalized;
+        }
+    }
+
+    public static Vector2 cameraInput => OVRInput.Get(OVRInput.RawAxis2D.LThumbstick);
 }
