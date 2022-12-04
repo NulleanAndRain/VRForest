@@ -18,12 +18,6 @@ public class PlayerController : MonoBehaviour
     [Header("Mouse camera moving")]
     [SerializeField] private Transform CamHolder;
 
-    private Vector3 rotation = Vector3.zero;
-    [Range(0.1f, 9f)][SerializeField] float sensitivity = 2f;
-    [Tooltip("Limits vertical camera rotation. Prevents the flipping that happens when rotation goes above 90.")]
-    [Range(0f, 90f)][SerializeField] float yRotationLimit = 88f;
-    const string xAxis = "Mouse X";
-    const string yAxis = "Mouse Y";
     private Vector3 moveDir;
 
     // Start is called before the first frame update
@@ -37,13 +31,12 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
 
-        rotation.x += Input.GetAxis(xAxis) * sensitivity;
-        rotation.y += Input.GetAxis(yAxis) * sensitivity;
-        rotation.y = Mathf.Clamp(rotation.y, -yRotationLimit, yRotationLimit);
+        var rotation = InputManager.cameraInput;
         var xQuat = Quaternion.AngleAxis(rotation.x, Vector3.up);
         var yQuat = Quaternion.AngleAxis(rotation.y, Vector3.left);
 
-        CamHolder.localRotation = xQuat * yQuat;
+        CamHolder.localRotation = yQuat;
+        transform.rotation = xQuat;
 
         var dir =
             (_playerCamera.transform.forward * InputManager.vertical +
