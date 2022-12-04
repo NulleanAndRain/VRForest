@@ -20,12 +20,28 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 moveDir;
 
+    [Header("UI")]
+    [SerializeField] private GameObject MenuCanvas;
+    [SerializeField] private GameObject UiPointer;
+    private bool _uiOpened = false;
+    private bool UiOpened
+    {
+        get => _uiOpened;
+        set
+        {
+            _uiOpened = value;
+            MenuCanvas?.SetActive(value);
+            UiPointer?.SetActive(value);
+            Cursor.visible = value;
+            Cursor.lockState = value ? CursorLockMode.Confined : CursorLockMode.Locked;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        UiOpened = false;
     }
 
     private void Update()
@@ -43,6 +59,11 @@ public class PlayerController : MonoBehaviour
             _playerCamera.transform.right * InputManager.horizontal);
         dir.y = 0;
         moveDir = dir.normalized;
+
+        if (InputManager.pauseInput)
+        {
+            UiOpened = !UiOpened;
+        } 
     }
 
     void FixedUpdate()

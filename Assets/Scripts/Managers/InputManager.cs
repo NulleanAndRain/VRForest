@@ -15,6 +15,7 @@ public class InputManager : MonoBehaviour
 
     private static InputManager _instance;
 
+    [Header("Camera")]
     [SerializeField] private float camSensitivity = 10;
     [SerializeField] private float camSensitivityMouse = 10;
 
@@ -23,6 +24,10 @@ public class InputManager : MonoBehaviour
     const string xAxis = "Mouse X";
     const string yAxis = "Mouse Y";
     private static Vector2 rotation = Vector2.zero;
+
+    [Header("Pause")]
+    [SerializeField] private KeyCode pauseKey = KeyCode.Escape;
+    [SerializeField] private OVRInput.Button pauseKeyVR = OVRInput.Button.Start;
 
     private void Awake()
     {
@@ -72,6 +77,15 @@ public class InputManager : MonoBehaviour
             rotation += OVRInput.Get(OVRInput.Axis2D.SecondaryThumbstick) * _instance.camSensitivity;
             rotation.y = Mathf.Clamp(rotation.y, -_instance.yRotationLimit, _instance.yRotationLimit);
             return rotation;
+        }
+    }
+
+    public static bool pauseInput
+    {
+        get
+        {
+            return Input.GetKeyDown(_instance.pauseKey) ||
+                OVRInput.GetDown(_instance.pauseKeyVR);
         }
     }
 }
