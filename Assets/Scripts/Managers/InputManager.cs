@@ -13,28 +13,7 @@ public class InputManager : MonoBehaviour
     private static float horVel = 0;
     private static float vertVel = 0;
 
-    private static InputManager _instance;
-
-    [Header("Camera")]
-    [SerializeField] private float camSensitivity = 10;
-    [SerializeField] private float camSensitivityMouse = 10;
-
-    [Tooltip("Limits vertical camera rotation. Prevents the flipping that happens when rotation goes above 90.")]
-    [Range(0f, 90f)][SerializeField] float yRotationLimit = 88f;
-    const string xAxis = "Mouse X";
-    const string yAxis = "Mouse Y";
-    private static Vector2 rotation = Vector2.zero;
-
-    [Header("Pause")]
-    [SerializeField] private KeyCode pauseKey = KeyCode.Escape;
-    [SerializeField] private OVRInput.Button pauseKeyVR = OVRInput.Button.Start;
-
-    private void Awake()
-    {
-        _instance = this;
-    }
-
-    public static float horizontal
+    public static float horizontal 
     {
         get
         {
@@ -63,29 +42,10 @@ public class InputManager : MonoBehaviour
     {
         get
         {
-            var i = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick);
+            var i = OVRInput.Get(OVRInput.RawAxis2D.RThumbstick);
             return new Vector3(-vertical + i.y, 0, horizontal + i.x).normalized;
         }
     }
 
-    public static Vector2 cameraInput
-    {
-        get
-        {
-            rotation.x += Input.GetAxis(xAxis) * _instance.camSensitivityMouse;
-            rotation.y += Input.GetAxis(yAxis) * _instance.camSensitivityMouse;
-            rotation += OVRInput.Get(OVRInput.Axis2D.SecondaryThumbstick) * _instance.camSensitivity;
-            rotation.y = Mathf.Clamp(rotation.y, -_instance.yRotationLimit, _instance.yRotationLimit);
-            return rotation;
-        }
-    }
-
-    public static bool pauseInput
-    {
-        get
-        {
-            return Input.GetKeyDown(_instance.pauseKey) ||
-                OVRInput.GetDown(_instance.pauseKeyVR);
-        }
-    }
+    public static Vector2 cameraInput => OVRInput.Get(OVRInput.RawAxis2D.LThumbstick);
 }

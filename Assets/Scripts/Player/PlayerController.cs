@@ -18,52 +18,38 @@ public class PlayerController : MonoBehaviour
     [Header("Mouse camera moving")]
     [SerializeField] private Transform CamHolder;
 
+    private Vector3 rotation = Vector3.zero;
+    [Range(0.1f, 9f)][SerializeField] float sensitivity = 2f;
+    [Tooltip("Limits vertical camera rotation. Prevents the flipping that happens when rotation goes above 90.")]
+    [Range(0f, 90f)][SerializeField] float yRotationLimit = 88f;
+    const string xAxis = "Mouse X";
+    const string yAxis = "Mouse Y";
     private Vector3 moveDir;
-
-    [Header("UI")]
-    [SerializeField] private GameObject MenuCanvas;
-    [SerializeField] private GameObject UiPointer;
-    private bool _uiOpened = false;
-    private bool UiOpened
-    {
-        get => _uiOpened;
-        set
-        {
-            _uiOpened = value;
-            MenuCanvas?.SetActive(value);
-            UiPointer?.SetActive(value);
-            Cursor.visible = value;
-            Cursor.lockState = value ? CursorLockMode.Confined : CursorLockMode.Locked;
-        }
-    }
 
     // Start is called before the first frame update
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
-        UiOpened = false;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Update()
     {
 
-        var rotation = InputManager.cameraInput;
+        rotation.x += Input.GetAxis(xAxis) * sensitivity;
+        rotation.y += Input.GetAxis(yAxis) * sensitivity;
+        rotation.y = Mathf.Clamp(rotation.y, -yRotationLimit, yRotationLimit);
         var xQuat = Quaternion.AngleAxis(rotation.x, Vector3.up);
         var yQuat = Quaternion.AngleAxis(rotation.y, Vector3.left);
 
-        CamHolder.localRotation = yQuat;
-        transform.rotation = xQuat;
+        CamHolder.localRotation = xQuat * yQuat;
 
         var dir =
             (_playerCamera.transform.forward * InputManager.vertical +
             _playerCamera.transform.right * InputManager.horizontal);
         dir.y = 0;
         moveDir = dir.normalized;
-
-        if (InputManager.pauseInput)
-        {
-            UiOpened = !UiOpened;
-        } 
     }
 
     void FixedUpdate()
