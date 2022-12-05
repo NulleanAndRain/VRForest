@@ -23,25 +23,28 @@ public class PlayerController : MonoBehaviour
     [Header("UI")]
     [SerializeField] private GameObject MenuCanvas;
     [SerializeField] private GameObject UiPointer;
-    private bool _uiOpened = false;
-    private bool UiOpened
+    [SerializeField] private MenuController menu;
+    private bool _menuUiOpened = false;
+    private bool MenuUiOpened
     {
-        get => _uiOpened;
+        get => _menuUiOpened;
         set
         {
-            _uiOpened = value;
-            MenuCanvas?.SetActive(value);
-            UiPointer?.SetActive(value);
-            Cursor.visible = value;
-            Cursor.lockState = value ? CursorLockMode.Confined : CursorLockMode.Locked;
+            _menuUiOpened = value;
+            MenuCanvas?.SetActive(_menuUiOpened);
+            if (UiPointer != null)
+                UiPointer.SetActive(_menuUiOpened);
+            Cursor.visible = _menuUiOpened;
+            Cursor.lockState = _menuUiOpened ? CursorLockMode.None : CursorLockMode.Locked;
         }
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
-        UiOpened = false;
+        MenuUiOpened = false;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Update()
@@ -62,8 +65,16 @@ public class PlayerController : MonoBehaviour
 
         if (InputManager.pauseInput)
         {
-            UiOpened = !UiOpened;
-        } 
+            MenuUiOpened = !MenuUiOpened;
+        }
+
+        if (MenuUiOpened)
+        {
+            if (InputManager.uiClickPressed)
+            {
+                menu.PressButtonUnderCursor(_playerCamera.ViewportToWorldPoint(Input.mousePosition));
+            }
+        }
     }
 
     void FixedUpdate()

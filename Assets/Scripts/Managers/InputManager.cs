@@ -88,4 +88,12 @@ public class InputManager : MonoBehaviour
                 OVRInput.GetDown(_instance.pauseKeyVR);
         }
     }
+
+    public static bool uiClickPressed
+    {
+        get
+        {
+            return Input.GetKeyDown(KeyCode.Mouse0);
+        }
+    }
 }
