@@ -63,7 +63,7 @@ public class InputManager : MonoBehaviour
     {
         get
         {
-            var i = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick);
+            var i = OVRInput.Get(OVRInput.RawAxis2D.RThumbstick);
             return new Vector3(-vertical + i.y, 0, horizontal + i.x).normalized;
         }
     }
@@ -74,7 +74,7 @@ public class InputManager : MonoBehaviour
         {
             rotation.x += Input.GetAxis(xAxis) * _instance.camSensitivityMouse;
             rotation.y += Input.GetAxis(yAxis) * _instance.camSensitivityMouse;
-            rotation += OVRInput.Get(OVRInput.Axis2D.SecondaryThumbstick) * _instance.camSensitivity;
+            rotation += OVRInput.Get(OVRInput.RawAxis2D.LThumbstick) * _instance.camSensitivity;
             rotation.y = Mathf.Clamp(rotation.y, -_instance.yRotationLimit, _instance.yRotationLimit);
             return rotation;
         }

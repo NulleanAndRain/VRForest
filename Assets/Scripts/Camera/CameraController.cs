@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.ImageEffects;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField]
-    private Camera _camera;
+    [SerializeField] private Camera _camera;
     public Camera Camera => _camera;
+    [SerializeField] private DepthOfField _dof;
 
     [SerializeField] private float _focalRangeMin;
     [SerializeField] private float _focalRangeMax;
@@ -25,12 +26,6 @@ public class CameraController : MonoBehaviour
 
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        CameraManager.CurrentCamera = this;
     }
 }
