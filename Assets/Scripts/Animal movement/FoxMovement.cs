@@ -7,6 +7,7 @@ public class FoxMovement : MonoBehaviour
 {
     private NavMeshAgent agent;
     private Vector3 here;
+    public Transform[] wayPoint = new Transform[10];
 
     private void Start()
     {
