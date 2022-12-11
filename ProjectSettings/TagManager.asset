@@ -7,6 +7,8 @@ TagManager:
   - WayPoint1
   - WayPoint2
   - WayPoint
+  - Points
+  - foxSavePoint
   layers:
   - Default
   - TransparentFX
