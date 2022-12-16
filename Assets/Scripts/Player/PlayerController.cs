@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -24,6 +27,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject MenuCanvas;
     [SerializeField] private GameObject UiPointer;
     [SerializeField] private MenuController menu;
+    [SerializeField] private PlayerUiPointer pointer;
     private bool _menuUiOpened = false;
     private bool MenuUiOpened
     {
@@ -72,7 +76,10 @@ public class PlayerController : MonoBehaviour
         {
             if (InputManager.uiClickPressed)
             {
-                menu.PressButtonUnderCursor(_playerCamera.ViewportToWorldPoint(Input.mousePosition));
+#if UNITY_EDITOR
+                RaycastFromCursor();
+#endif
+                pointer.ClickUI();
             }
         }
     }
@@ -107,6 +114,32 @@ public class PlayerController : MonoBehaviour
             
             _rb.MovePosition(_rb.position + moveDir * _speed * Time.deltaTime);
             
+        }
+    }
+
+    private void RaycastFromCursor()
+    {
+        Ray ray = _playerCamera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        //linePointer.SetPosition(0, ray.origin);
+        if (Physics.Raycast(ray, out hit, 2.5f))
+        {
+            var uiObject = hit.rigidbody?.GetComponent<OVRRaycaster>();
+            if (uiObject == null) return;
+            var hitPos = uiObject.transform.InverseTransformPoint(hit.point);
+
+            var e = new PointerEventData(EventSystem.current);
+            e.position = hitPos;
+
+            var res = new List<RaycastResult>();
+            uiObject.Raycast(e, res);
+
+            var btn = res
+                .Select(r => r.gameObject.GetComponent<Button>())
+                .FirstOrDefault(b => b != null);
+            if (btn != null)
+                ExecuteEvents.Execute(btn.gameObject, e, ExecuteEvents.submitHandler);
         }
     }
 }

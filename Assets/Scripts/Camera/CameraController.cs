@@ -23,9 +23,19 @@ public class CameraController : MonoBehaviour
         }
     }
 
+    private Vector3 _startPos;
+    private Quaternion _rotationStrart;
 
     void Start()
     {
         CameraManager.CurrentCamera = this;
+        _rotationStrart = transform.localRotation;
+        _startPos = transform.localPosition;
+    }
+
+    private void FixedUpdate()
+    {
+        transform.localRotation = _rotationStrart;
+        transform.localPosition = _startPos;
     }
 }

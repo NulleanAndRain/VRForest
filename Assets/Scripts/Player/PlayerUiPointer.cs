@@ -15,13 +15,28 @@ public class PlayerUiPointer : MonoBehaviour
 	[Tooltip("Visually, how far out should the ray be drawn.")]
 	public float rayDrawDistance = 2.5f;
 
+	[SerializeField] OVRGazePointer pointer;
+
+	private OVRRaycaster _uiObject;
+	private Vector3 _hitPos;
+
     private void Start()
     {
 		linePointer.enabled = true;
 		linePointer.positionCount = 2;
 	}
 
-    void Update()
+    private void OnEnable()
+    {
+        pointer.RequestShow();
+    }
+
+    private void OnDisable()
+	{ 
+        pointer.RequestHide();
+    }
+
+    void FixedUpdate()
 	{
 		Ray ray = new Ray(rayTransform.position, rayTransform.forward);
 		RaycastHit hit;
@@ -30,25 +45,29 @@ public class PlayerUiPointer : MonoBehaviour
 		if (Physics.Raycast(ray, out hit, rayDrawDistance))
 		{
 			linePointer.SetPosition(1, hit.point);
-			var rc = hit.rigidbody.GetComponent<OVRRaycaster>();
-			var e = new PointerEventData(EventSystem.current);
-			e.position = rc.transform.InverseTransformPoint(hit.point);
+            _uiObject = hit.rigidbody?.GetComponent<OVRRaycaster>();
+			if (_uiObject == null) return;
+            _hitPos = _uiObject.transform.InverseTransformPoint(hit.point);
 
-			var res = new List<RaycastResult>();
-			rc.Raycast(e, res);
-
-			if (InputManager.uiClickPressed) 
-			{
-				var btn = res
-					.Select(r => r.gameObject.GetComponent<Button>())
-					.FirstOrDefault(b => b != null);
-				if (btn != null)
-					ExecuteEvents.Execute(btn.gameObject, e, ExecuteEvents.submitHandler);
-			}
-		}
+        }
 		else
 		{
 			linePointer.SetPosition(1, ray.origin + ray.direction * rayDrawDistance);
 		}
 	}
+
+	public void ClickUI()
+	{
+        var e = new PointerEventData(EventSystem.current);
+		e.position = _hitPos;
+
+        var res = new List<RaycastResult>();
+        _uiObject?.Raycast(e, res);
+
+        var btn = res
+            .Select(r => r.gameObject.GetComponent<Button>())
+            .FirstOrDefault(b => b != null);
+        if (btn != null)
+            ExecuteEvents.Execute(btn.gameObject, e, ExecuteEvents.submitHandler);
+    }
 }

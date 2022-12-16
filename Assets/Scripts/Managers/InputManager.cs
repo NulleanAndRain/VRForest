@@ -29,6 +29,10 @@ public class InputManager : MonoBehaviour
     [SerializeField] private KeyCode pauseKey = KeyCode.Escape;
     [SerializeField] private OVRInput.Button pauseKeyVR = OVRInput.Button.Start;
 
+    [Header("Debug")]
+    [SerializeField] private bool usePcInput = false;
+    public static bool UsePcInput => _instance.usePcInput;
+
     private void Awake()
     {
         _instance = this;
@@ -38,10 +42,15 @@ public class InputManager : MonoBehaviour
     {
         get
         {
-            var i = Input.GetAxisRaw("Horizontal");
-            if (Mathf.Abs(i) >= Mathf.Epsilon)
+            float r = 0;
+            if (UsePcInput)
             {
-                return Mathf.SmoothDamp(horCurrent, i, ref horVel, moveSmooth);
+                r = Input.GetAxisRaw("Horizontal");
+            }
+            r += OVRInput.Get(OVRInput.RawAxis2D.LThumbstick).x;
+            if (Mathf.Abs(r) >= Mathf.Epsilon)
+            {
+                return Mathf.SmoothDamp(horCurrent, r, ref horVel, moveSmooth);
             }
             return Mathf.SmoothDamp(horCurrent, 0, ref horVel, stopSmooth);
         }
@@ -50,10 +59,15 @@ public class InputManager : MonoBehaviour
     {
         get
         {
-            var i = Input.GetAxisRaw("Vertical");
-            if (Mathf.Abs(i) >= Mathf.Epsilon)
+            float r = 0;
+            if (UsePcInput)
             {
-                return Mathf.SmoothDamp(vertCurrent, i, ref vertVel, moveSmooth);
+                r = Input.GetAxisRaw("Vertical");
+            }
+            r += OVRInput.Get(OVRInput.RawAxis2D.LThumbstick).x;
+            if (Mathf.Abs(r) >= Mathf.Epsilon)
+            {
+                return Mathf.SmoothDamp(vertCurrent, r, ref vertVel, moveSmooth);
             }
             return Mathf.SmoothDamp(vertCurrent, 0, ref vertVel, stopSmooth);
         }
@@ -72,8 +86,11 @@ public class InputManager : MonoBehaviour
     {
         get
         {
-            rotation.x += Input.GetAxis(xAxis) * _instance.camSensitivityMouse;
-            rotation.y += Input.GetAxis(yAxis) * _instance.camSensitivityMouse;
+            if (UsePcInput)
+            {
+                rotation.x += Input.GetAxis(xAxis) * _instance.camSensitivityMouse;
+                rotation.y += Input.GetAxis(yAxis) * _instance.camSensitivityMouse;
+            }
             rotation += OVRInput.Get(OVRInput.RawAxis2D.LThumbstick) * _instance.camSensitivity;
             rotation.y = Mathf.Clamp(rotation.y, -_instance.yRotationLimit, _instance.yRotationLimit);
             return rotation;
@@ -93,7 +110,15 @@ public class InputManager : MonoBehaviour
     {
         get
         {
-            return Input.GetKeyDown(KeyCode.Mouse0);
+            return Input.GetKeyDown(KeyCode.Mouse0) || OVRInput.Get(OVRInput.Button.SecondaryIndexTrigger);
+        }
+    }
+
+    public static bool cameraTriggerPressed
+    {
+        get
+        {
+            return Input.GetKeyDown(KeyCode.Mouse1) || OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger);
         }
     }
 }
