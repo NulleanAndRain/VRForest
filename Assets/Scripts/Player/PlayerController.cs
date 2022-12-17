@@ -95,7 +95,8 @@ public class PlayerController : MonoBehaviour
             {
                 if (CameraManager.CurrentCamera == null)
                     UpdateHandCamera();
-                _willTakeShot = true;
+
+                CameraManager.MakeCameraShot();
             }
         }
     }
@@ -130,15 +131,6 @@ public class PlayerController : MonoBehaviour
             
             _rb.MovePosition(_rb.position + moveDir * _speed * Time.deltaTime);
             
-        }
-    }
-
-    private void LateUpdate()
-    {
-        if (_willTakeShot)
-        {
-            _willTakeShot= false;
-            CameraManager.MakeCameraShot();
         }
     }
 

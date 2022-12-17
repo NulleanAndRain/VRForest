@@ -274,6 +274,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &108530222 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5057667996598665218, guid: 40362ab11430f164bae5babe11af0a08,
+    type: 3}
+  m_PrefabInstance: {fileID: 8705910144507594325}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &108530223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 108530222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55e58b966babc6844b7e1de98b6dca47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AnimalName: Croco
 --- !u!114 &164803589 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8968330904992715365, guid: 84e4ab151e70c8d4f9bbd14f88597cf0,
@@ -343,6 +362,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8b2d47fdc2e25ac4f9721480a68bbefa, type: 3}
+--- !u!1 &323830820 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2131802952369547667, guid: d27798887c8a7f44b8fab951867d8e9d,
+    type: 3}
+  m_PrefabInstance: {fileID: 2131802952857036622}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &323830821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 323830820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55e58b966babc6844b7e1de98b6dca47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AnimalName: Fox
 --- !u!1 &335380636
 GameObject:
   m_ObjectHideFlags: 0
@@ -2228,6 +2266,25 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1599519967}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1653425058 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6837209583357112635, guid: c68e8384f81f8484a98126ad0dd26cac,
+    type: 3}
+  m_PrefabInstance: {fileID: 5155671479159848810}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1653425059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1653425058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55e58b966babc6844b7e1de98b6dca47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AnimalName: Turtle
 --- !u!1 &1683952127
 GameObject:
   m_ObjectHideFlags: 0
@@ -2304,6 +2361,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1683952127}
   m_CullTransparentMesh: 1
+--- !u!1 &1726190116 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8972284722460627010, guid: 3afe77c0bcc52a74e89d391f4862cd92,
+    type: 3}
+  m_PrefabInstance: {fileID: 8089200208818214388}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1726190117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1726190116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55e58b966babc6844b7e1de98b6dca47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AnimalName: Eagle
 --- !u!1 &1729194222
 GameObject:
   m_ObjectHideFlags: 0
@@ -3152,6 +3228,7 @@ GameObject:
   - component: {fileID: 1926395334}
   - component: {fileID: 1926395333}
   - component: {fileID: 1926395332}
+  - component: {fileID: 1926395336}
   m_Layer: 0
   m_Name: Cube (3)
   m_TagString: Untagged
@@ -3235,6 +3312,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 91.859, z: 0}
+--- !u!114 &1926395336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926395331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55e58b966babc6844b7e1de98b6dca47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AnimalName: aboba
 --- !u!1001 &1829252926432247226
 PrefabInstance:
   m_ObjectHideFlags: 0

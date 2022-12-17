@@ -37,42 +37,52 @@ public class CameraManager : MonoBehaviour
         Instance = this;
     }
 
+    public static bool IsTakingShot { get; private set; }
+
     public static void MakeCameraShot()
     {
-        var Cam = CurrentCamera.Camera;
-
-        RenderTexture currentRT = RenderTexture.active;
-        RenderTexture.active = OutputTexture;
-        // Cam.Render();
-
-        Texture2D Image = new Texture2D(Cam.targetTexture.width, Cam.targetTexture.height, TextureFormat.RGB24, mipCount: -1, linear: true);
-        Image.ReadPixels(new Rect(0, 0, Cam.targetTexture.width, Cam.targetTexture.height), 0, 0, false);
-        Image.filterMode = FilterMode.Trilinear;
-
-        Image.Apply();
-
-        RenderTexture.active = currentRT;
-
-        var Bytes = Image.EncodeToJPG();
-        Destroy(Image);
-
-        var folder = Application.dataPath + SaveFolder;
-        if (!Directory.Exists(folder))
-            Directory.CreateDirectory(folder);
-        var fileName = DateTime.Now.ToString("G")
-            .Replace(" ", "_")
-            .Replace(":", ".");
-        var i = 1;
-        var fileNameNew = fileName;
-        while (File.Exists(folder + fileNameNew + SaveFormat))
+        IEnumerator takeShot()
         {
-            fileNameNew = $"{fileName}_{i}";
-            i++;
+            yield return new WaitForEndOfFrame();
+            IsTakingShot = true;
+            var Cam = CurrentCamera.Camera;
+
+            RenderTexture currentRT = RenderTexture.active;
+            RenderTexture.active = OutputTexture;
+            Cam.Render();
+
+            Texture2D Image = new Texture2D(Cam.targetTexture.width, Cam.targetTexture.height, TextureFormat.RGB24, mipCount: -1, linear: true);
+            Image.ReadPixels(new Rect(0, 0, Cam.targetTexture.width, Cam.targetTexture.height), 0, 0, false);
+            Image.filterMode = FilterMode.Trilinear;
+
+            Image.Apply();
+
+            RenderTexture.active = currentRT;
+
+            var Bytes = Image.EncodeToJPG();
+            Destroy(Image);
+
+            var folder = Application.dataPath + SaveFolder;
+            if (!Directory.Exists(folder))
+                Directory.CreateDirectory(folder);
+            var fileName = DateTime.Now.ToString("G")
+                .Replace(" ", "_")
+                .Replace(":", ".");
+            var i = 1;
+            var fileNameNew = fileName;
+            while (File.Exists(folder + fileNameNew + SaveFormat))
+            {
+                fileNameNew = $"{fileName}_{i}";
+                i++;
+            }
+
+            var filePath = folder + fileNameNew + SaveFormat;
+            File.WriteAllBytes(filePath, Bytes);
+
+            Debug.Log($"Saved to {filePath}");
+
+            IsTakingShot = false;
         }
-
-        var filePath = folder + fileNameNew + SaveFormat;
-        File.WriteAllBytes(filePath, Bytes);
-
-        Debug.Log($"Saved to {filePath}");
+        Instance.StartCoroutine(takeShot());
     }
 }
