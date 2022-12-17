@@ -11,6 +11,7 @@ public class CrocoMovement : MonoBehaviour
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        agent.SetDestination(new Vector3(100f, 0f, 100f));
     }
 
     void Update()
