@@ -125,7 +125,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e064c85730fdd0429292ed31967e012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outputTex: {fileID: 8400000, guid: c3f25513a217f6b43a53545b0103089c, type: 2}
+  outputTex: {fileID: 8600000, guid: 5398dbb8b7d4e3c4bb3f4cd2a740aaae, type: 2}
+  _saveFolder: /Images/
 --- !u!114 &8968330905972654589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,3 +144,4 @@ MonoBehaviour:
   yRotationLimit: 88
   pauseKey: 27
   pauseKeyVR: 256
+  usePcInput: 1

@@ -43,12 +43,19 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    [Header("Camera")]
+    [SerializeField] private Transform _camHand;
+    [SerializeField] private CameraController _startCamera;
+
+
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
         MenuUiOpened = false;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+
+        CameraManager.CurrentCamera = _startCamera;
     }
 
     private void Update()
@@ -80,6 +87,15 @@ public class PlayerController : MonoBehaviour
                 RaycastFromCursor();
 #endif
                 pointer.ClickUI();
+            }
+        }
+        else
+        {
+            if (InputManager.cameraTriggerPressed)
+            {
+                if (CameraManager.CurrentCamera == null)
+                    UpdateHandCamera();
+                CameraManager.MakeCameraShot();
             }
         }
     }
@@ -115,6 +131,12 @@ public class PlayerController : MonoBehaviour
             _rb.MovePosition(_rb.position + moveDir * _speed * Time.deltaTime);
             
         }
+    }
+
+    private void UpdateHandCamera()
+    {
+        var cam = _camHand.GetComponentInChildren<CameraController>();
+        CameraManager.CurrentCamera = cam;
     }
 
     private void RaycastFromCursor()
