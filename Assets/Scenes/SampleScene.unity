@@ -1351,6 +1351,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 511263506}
+  - component: {fileID: 511263507}
   m_Layer: 0
   m_Name: WorldButtons
   m_TagString: Untagged
@@ -1376,6 +1377,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &511263507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 511263505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93ae7df5e2f1a804a959d85add210cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startButton: {fileID: 1516118757}
+  exitButton: {fileID: 723018094}
+  sceneId: 1
 --- !u!1 &543160911
 GameObject:
   m_ObjectHideFlags: 0
@@ -3708,6 +3724,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1258546830}
+  - component: {fileID: 1258546831}
   m_Layer: 0
   m_Name: HandButtons
   m_TagString: Untagged
@@ -3731,6 +3748,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1258546831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1258546829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 511550fa4da4aca439455be0c4d05782, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  openButton: {fileID: 1765428526}
+  handPanel: {fileID: 1524719409}
+  closeButton: {fileID: 1090325016}
+  albumButton: {fileID: 1239421183}
+  shopButton: {fileID: 1083549405}
+  albumContainer: {fileID: 999207358}
+  shopContainer: {fileID: 1660571169}
 --- !u!1 &1350450605
 GameObject:
   m_ObjectHideFlags: 0
