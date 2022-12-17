@@ -17,7 +17,8 @@ public class PlayerUiPointer : MonoBehaviour
 
 	[SerializeField] OVRGazePointer pointer;
 
-	private OVRRaycaster _uiObject;
+	private GameObject _hitObject;
+	//private OVRRaycaster _uiObject;
 	private Vector3 _hitPos;
 
     private void Start()
@@ -45,9 +46,13 @@ public class PlayerUiPointer : MonoBehaviour
 		if (Physics.Raycast(ray, out hit, rayDrawDistance))
 		{
 			linePointer.SetPosition(1, hit.point);
-            _uiObject = hit.rigidbody?.GetComponent<OVRRaycaster>();
-			if (_uiObject == null) return;
-            _hitPos = _uiObject.transform.InverseTransformPoint(hit.point);
+			//_uiObject = hit.rigidbody?.GetComponent<OVRRaycaster>();
+			//if (_uiObject == null) return;
+			//_hitPos = _uiObject.transform.InverseTransformPoint(hit.point);
+			_hitObject = hit.collider.GetComponent<GameObject>();
+            if (_hitObject == null) return;
+            _hitPos = _hitObject.transform.InverseTransformPoint(hit.point);
+
 
         }
 		else
@@ -62,7 +67,7 @@ public class PlayerUiPointer : MonoBehaviour
 		e.position = _hitPos;
 
         var res = new List<RaycastResult>();
-        _uiObject?.Raycast(e, res);
+        //_uiObject?.Raycast(e, res);
 
         var btn = res
             .Select(r => r.gameObject.GetComponent<Button>())
