@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 
 public class CameraManager : MonoBehaviour
@@ -12,9 +14,9 @@ public class CameraManager : MonoBehaviour
     private CameraController _camera;
 
     [Header("ImageSaving")]
-    private static int fliesCount = 0;
-    [SerializeField] private string _saveFolder = "/_Images/";
+    [SerializeField] private string _saveFolder = "/_Images";
     private static string SaveFolder => Instance._saveFolder;
+    private const string SaveFormat = ".jpg";
 
     public static CameraController CurrentCamera
     {
@@ -41,23 +43,35 @@ public class CameraManager : MonoBehaviour
 
         RenderTexture currentRT = RenderTexture.active;
         RenderTexture.active = OutputTexture;
+        // Cam.Render();
 
-        Cam.Render();
+        Texture2D Image = new Texture2D(Cam.targetTexture.width, Cam.targetTexture.height, TextureFormat.RGB24, mipCount: -1, linear: true);
+        Image.ReadPixels(new Rect(0, 0, Cam.targetTexture.width, Cam.targetTexture.height), 0, 0, false);
+        Image.filterMode = FilterMode.Trilinear;
 
-        Texture2D Image = new Texture2D(Cam.targetTexture.width, Cam.targetTexture.height);
-        Image.ReadPixels(new Rect(0, 0, Cam.targetTexture.width, Cam.targetTexture.height), 0, 0);
         Image.Apply();
+
         RenderTexture.active = currentRT;
 
-        var Bytes = Image.EncodeToPNG();
+        var Bytes = Image.EncodeToJPG();
         Destroy(Image);
 
         var folder = Application.dataPath + SaveFolder;
-        if (!Directory.Exists(folder)) 
+        if (!Directory.Exists(folder))
             Directory.CreateDirectory(folder);
-        var filePath = folder + fliesCount + ".png";
+        var fileName = DateTime.Now.ToString("G")
+            .Replace(" ", "_")
+            .Replace(":", ".");
+        var i = 1;
+        var fileNameNew = fileName;
+        while (File.Exists(folder + fileNameNew + SaveFormat))
+        {
+            fileNameNew = $"{fileName}_{i}";
+            i++;
+        }
+
+        var filePath = folder + fileNameNew + SaveFormat;
         File.WriteAllBytes(filePath, Bytes);
-        fliesCount++;
 
         Debug.Log($"Saved to {filePath}");
     }

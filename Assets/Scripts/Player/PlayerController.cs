@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
     [Header("Camera")]
     [SerializeField] private Transform _camHand;
     [SerializeField] private CameraController _startCamera;
-
+    private bool _willTakeShot = false;
 
     void Start()
     {
@@ -95,7 +95,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (CameraManager.CurrentCamera == null)
                     UpdateHandCamera();
-                CameraManager.MakeCameraShot();
+                _willTakeShot = true;
             }
         }
     }
@@ -130,6 +130,15 @@ public class PlayerController : MonoBehaviour
             
             _rb.MovePosition(_rb.position + moveDir * _speed * Time.deltaTime);
             
+        }
+    }
+
+    private void LateUpdate()
+    {
+        if (_willTakeShot)
+        {
+            _willTakeShot= false;
+            CameraManager.MakeCameraShot();
         }
     }
 

@@ -14,11 +14,11 @@ CustomRenderTexture:
   m_DownscaleFallback: 0
   m_IsAlphaChannelOptional: 0
   serializedVersion: 3
-  m_Width: 1024
-  m_Height: 1024
+  m_Width: 2048
+  m_Height: 2048
   m_AntiAliasing: 1
   m_MipCount: -1
-  m_DepthFormat: 2
+  m_DepthFormat: 1
   m_ColorFormat: 8
   m_MipMap: 0
   m_GenerateMips: 1
@@ -28,7 +28,7 @@ CustomRenderTexture:
   m_EnableCompatibleFormat: 1
   m_TextureSettings:
     serializedVersion: 2
-    m_FilterMode: 1
+    m_FilterMode: 2
     m_Aniso: 0
     m_MipBias: 0
     m_WrapU: 1
@@ -36,11 +36,11 @@ CustomRenderTexture:
     m_WrapW: 1
   m_Dimension: 2
   m_VolumeDepth: 1
-  m_Material: {fileID: 2100000, guid: f9a8093b5b0fe0e4fa55f3e04c6bc199, type: 2}
-  m_InitSource: 0
-  m_InitMaterial: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: f1516b103c2af614ca063d9ecbf555ba, type: 2}
+  m_InitSource: 1
+  m_InitMaterial: {fileID: 2100000, guid: f1516b103c2af614ca063d9ecbf555ba, type: 2}
   m_InitColor: {r: 1, g: 1, b: 1, a: 1}
-  m_InitTexture: {fileID: 0}
+  m_InitTexture: {fileID: 10307, guid: 0000000000000000f000000000000000, type: 0}
   m_UpdateMode: 0
   m_InitializationMode: 2
   m_UpdateZoneSpace: 0

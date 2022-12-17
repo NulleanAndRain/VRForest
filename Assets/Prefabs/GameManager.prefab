@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outputTex: {fileID: 8600000, guid: 5398dbb8b7d4e3c4bb3f4cd2a740aaae, type: 2}
-  _saveFolder: /Images/
+  _saveFolder: /TempImages/
 --- !u!114 &8968330905972654589
 MonoBehaviour:
   m_ObjectHideFlags: 0
