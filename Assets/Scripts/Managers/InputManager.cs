@@ -13,6 +13,9 @@ public class InputManager : MonoBehaviour
     private static float horVel = 0;
     private static float vertVel = 0;
 
+    private static float _camParamCurrent = 0;
+    private static float _camParamVel = 0;
+
     private static InputManager _instance;
 
     [Header("Camera")]
@@ -28,6 +31,13 @@ public class InputManager : MonoBehaviour
     [Header("Pause")]
     [SerializeField] private KeyCode pauseKey = KeyCode.Escape;
     [SerializeField] private OVRInput.Button pauseKeyVR = OVRInput.Button.Start;
+
+    [Header("Camera Params menu")]
+    [SerializeField] private KeyCode _paramUpKey = KeyCode.R;
+    [SerializeField] private KeyCode _paramDownKey = KeyCode.F;
+
+    [SerializeField] private OVRInput.RawButton _paramUpKeyVR = OVRInput.RawButton.B;
+    [SerializeField] private OVRInput.RawButton _paramDownKeyVR = OVRInput.RawButton.A;
 
     [Header("Debug")]
     [SerializeField] private bool usePcInput = false;
@@ -110,7 +120,7 @@ public class InputManager : MonoBehaviour
     {
         get
         {
-            return Input.GetKeyDown(KeyCode.Mouse0) || OVRInput.Get(OVRInput.Button.SecondaryIndexTrigger);
+            return UsePcInput && Input.GetKeyDown(KeyCode.Mouse0) || OVRInput.Get(OVRInput.Button.SecondaryIndexTrigger);
         }
     }
 
@@ -118,7 +128,36 @@ public class InputManager : MonoBehaviour
     {
         get
         {
-            return Input.GetKeyDown(KeyCode.Mouse1) || OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger);
+            return UsePcInput && Input.GetKeyDown(KeyCode.Mouse1) || OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger);
         }
     }
+
+    public static float cameraParamSliderValue
+    {
+        get
+        {
+            float r = 0;
+            if (UsePcInput)
+            {
+                r = Input.GetKey(_instance._paramUpKey) ? 1 : 
+                        (Input.GetKey(_instance._paramDownKey) ? -1 : 0
+                );
+            }
+            r += OVRInput.Get(_instance._paramUpKeyVR) ? 1 : 
+                    (OVRInput.Get(_instance._paramDownKeyVR) ? -1 : 0
+                );
+
+            if (Mathf.Abs(r) >= Mathf.Epsilon)
+            {
+                return Mathf.SmoothDamp(_camParamCurrent, r, ref _camParamCurrent, moveSmooth);
+            }
+            return 0;
+        }
+    }
+
+    public static bool touchedAnyCameraParamControll =>
+        Input.GetKey(_instance._paramUpKey) ||
+        Input.GetKey(_instance._paramDownKey) ||
+        OVRInput.Get(_instance._paramUpKeyVR) ||
+        OVRInput.Get(_instance._paramDownKeyVR);
 }

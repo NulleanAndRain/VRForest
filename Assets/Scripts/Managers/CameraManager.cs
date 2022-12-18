@@ -18,6 +18,10 @@ public class CameraManager : MonoBehaviour
     private static string SaveFolder => Instance._saveFolder;
     private const string SaveFormat = ".jpg";
 
+    [Header("Camera params")]
+    [SerializeField] private float _zoomSpeed = 0.5f;
+    public static float ZoomSpeed => Instance._zoomSpeed;
+
     public static CameraController CurrentCamera
     {
         get => Instance?._camera;
@@ -28,7 +32,7 @@ public class CameraManager : MonoBehaviour
                 Instance._camera.ResetCamera();
             }
             Instance._camera = value;
-            value.SetRenderTex(OutputTexture);
+            value!.SetRenderTex(OutputTexture);
         }
     }
 
@@ -84,5 +88,10 @@ public class CameraManager : MonoBehaviour
             IsTakingShot = false;
         }
         Instance.StartCoroutine(takeShot());
+    }
+
+    public static void Zoom(float speed)
+    {
+        CurrentCamera.Zoom += speed;
     }
 }

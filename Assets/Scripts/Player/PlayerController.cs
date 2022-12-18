@@ -48,6 +48,21 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private CameraController _startCamera;
     private bool _willTakeShot = false;
 
+    private static PlayerController _instance;
+
+    private void Awake()
+    {
+        if (_instance == null)
+        {
+            _instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
@@ -97,6 +112,15 @@ public class PlayerController : MonoBehaviour
                     UpdateHandCamera();
 
                 CameraManager.MakeCameraShot();
+            }
+
+            if (Mathf.Abs(InputManager.cameraParamSliderValue) >= 0.01f)
+            {
+                CameraManager.Zoom(
+                    InputManager.cameraParamSliderValue *
+                    CameraManager.ZoomSpeed *
+                    Time.deltaTime
+                );
             }
         }
     }

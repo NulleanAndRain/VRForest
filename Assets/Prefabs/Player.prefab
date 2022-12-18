@@ -539,7 +539,7 @@ GameObject:
   - component: {fileID: 1829252926432247229}
   m_Layer: 3
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -635,6 +635,7 @@ MonoBehaviour:
   menu: {fileID: 1829252925404935591}
   pointer: {fileID: 1562069064}
   _camHand: {fileID: 1593459913}
+  _startCamera: {fileID: 7753635879393571411}
 --- !u!114 &1829252926432247229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2551,6 +2552,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1593459913}
     m_Modifications:
+    - target: {fileID: 3298936492383972580, guid: 36a811287fbd9bd4293369d3c61ef805,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8284579426853704698, guid: 36a811287fbd9bd4293369d3c61ef805,
         type: 3}
       propertyPath: m_RootOrder
@@ -2613,6 +2619,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36a811287fbd9bd4293369d3c61ef805, type: 3}
+--- !u!114 &7753635879393571411 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 873462676, guid: 36a811287fbd9bd4293369d3c61ef805,
+    type: 3}
+  m_PrefabInstance: {fileID: 7753635878520867271}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 775f613cc27ce184e949684ad2caa0b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1829252925754055229 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8284579426853704698, guid: 36a811287fbd9bd4293369d3c61ef805,

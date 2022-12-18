@@ -18,23 +18,26 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float _focalRangeMax;
     
 
-    private float _focalRange;
-    public float FocalRange
+    private float _zoom;
+    public float Zoom
     {
-        get => _focalRange;
+        get => _zoom;
         set
         {
-            _focalRange = Mathf.Clamp(value, _focalRangeMin, _focalRangeMax);
-            Camera.focalLength = _focalRange;
+            _zoom = Mathf.Clamp(value, _focalRangeMin, _focalRangeMax);
+            Camera.focalLength = _zoom;
         }
     }
 
-
-    void Start()
+    void Awake()
     {
-        // CameraManager.CurrentCamera = this;
         _screenMat = Instantiate(_screenDefaultMat);
         _screenPlane.material = _screenMat;
+    }
+
+    private void Start()
+    {
+        Zoom = _focalRangeMin;
     }
 
     public void SetRenderTex(RenderTexture tex)
