@@ -41,7 +41,15 @@ public class CameraManager : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(this);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     public static bool IsTakingShot { get; private set; }
@@ -95,6 +103,6 @@ public class CameraManager : MonoBehaviour
 
     public static void Zoom(float speed)
     {
-        CurrentCamera.Zoom += speed;
+        CurrentCamera!.Zoom += speed;
     }
 }

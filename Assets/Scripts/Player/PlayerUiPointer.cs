@@ -15,7 +15,6 @@ public class PlayerUiPointer : MonoBehaviour
 	[Tooltip("Visually, how far out should the ray be drawn.")]
 	public float rayDrawDistance = 2.5f;
 
-	[SerializeField] OVRGazePointer pointer;
 
 	private OVRRaycaster _uiObject;
 	private Vector3 _hitPos;
@@ -25,16 +24,6 @@ public class PlayerUiPointer : MonoBehaviour
 		linePointer.enabled = true;
 		linePointer.positionCount = 2;
 	}
-
-    private void OnEnable()
-    {
-        pointer.RequestShow();
-    }
-
-    private void OnDisable()
-	{ 
-        pointer.RequestHide();
-    }
 
     void FixedUpdate()
 	{

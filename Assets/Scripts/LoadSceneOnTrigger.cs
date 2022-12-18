@@ -7,12 +7,13 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(Collider))]
 public class LoadSceneOnTrigger : MonoBehaviour
 {
-    [SerializeField] private Scene TargetScene;
+    [SerializeField] private Scene _targetScene;
+    [SerializeField] private LoadSceneMode _loadMode;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
-            SceneManager.LoadScene((int)TargetScene);
+            SceneManager.LoadScene((int)_targetScene, _loadMode);
     }
 
     [Serializable]

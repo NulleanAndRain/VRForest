@@ -7,12 +7,14 @@ using UnityEngine.SceneManagement;
 public class PlayerLoader : MonoBehaviour
 {
     [SerializeField] private Transform _playerStartPos;
-    public static PlayerLoader Instance { get; private set; }
     public static event UnityAction<GameObject> OnPlayersCameraLoaded = delegate { };
+
+    [SerializeField] private bool _doRotateGlobalLight;
+    [SerializeField] private Transform _globalLight;
+    [SerializeField] private Vector3 _globalLightRotation;
 
     private void Awake()
     {
-        Instance = this;
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
@@ -33,6 +35,11 @@ public class PlayerLoader : MonoBehaviour
         }
         StartCoroutine(awaitLoad());
         UpdatePlayer();
+
+        if (_doRotateGlobalLight)
+        {
+            _globalLight!.localEulerAngles = _globalLightRotation;
+        }
     }
 
     private void UpdatePlayer()

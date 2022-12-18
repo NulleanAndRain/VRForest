@@ -2181,6 +2181,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerStartPos: {fileID: 1687163094}
+  _doRotateGlobalLight: 1
+  _globalLight: {fileID: 1089558530}
+  _globalLightRotation: {x: 50, y: -30, z: 0}
 --- !u!1 &1737197845
 GameObject:
   m_ObjectHideFlags: 0

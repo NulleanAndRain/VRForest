@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
@@ -50,12 +51,16 @@ public class PlayerController : MonoBehaviour
 
     private static PlayerController _instance;
 
+    private LayerMask _layerMaskDefault;
+
     private void Awake()
     {
         if (_instance == null)
         {
             _instance = this;
             DontDestroyOnLoad(gameObject);
+            _layerMaskDefault = LayerMask.GetMask("Default");
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
         else
         {
@@ -71,6 +76,12 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
 
         CameraManager.CurrentCamera = _startCamera;
+    }
+
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        UpdateHandCamera();
     }
 
     private void Update()
@@ -116,6 +127,9 @@ public class PlayerController : MonoBehaviour
 
             if (Mathf.Abs(InputManager.cameraParamSliderValue) >= 0.01f)
             {
+                if (CameraManager.CurrentCamera == null)
+                    UpdateHandCamera();
+
                 CameraManager.Zoom(
                     InputManager.cameraParamSliderValue *
                     CameraManager.ZoomSpeed *
