@@ -126,7 +126,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outputTex: {fileID: 8600000, guid: 5398dbb8b7d4e3c4bb3f4cd2a740aaae, type: 2}
+  _maxDistToObject: 25
   _saveFolder: /TempImages/
+  _zoomSpeed: 10
 --- !u!114 &8968330905972654589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,4 +146,8 @@ MonoBehaviour:
   yRotationLimit: 88
   pauseKey: 27
   pauseKeyVR: 256
+  _paramUpKey: 114
+  _paramDownKey: 102
+  _paramUpKeyVR: 2
+  _paramDownKeyVR: 1
   usePcInput: 1

@@ -13,13 +13,16 @@ public class CameraManager : MonoBehaviour
 
     private CameraController _camera;
 
+    [SerializeField] private float _maxDistToObject = 25f;
+    public static float MaxDistToObject => Instance._maxDistToObject;
+
     [Header("ImageSaving")]
     [SerializeField] private string _saveFolder = "/_Images";
     private static string SaveFolder => Instance._saveFolder;
     private const string SaveFormat = ".jpg";
 
     [Header("Camera params")]
-    [SerializeField] private float _zoomSpeed = 0.5f;
+    [SerializeField] private float _zoomSpeed = 10f;
     public static float ZoomSpeed => Instance._zoomSpeed;
 
     public static CameraController CurrentCamera

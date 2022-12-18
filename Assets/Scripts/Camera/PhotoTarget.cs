@@ -5,7 +5,7 @@ using UnityEngine;
 public class PhotoTarget : MonoBehaviour
 {
     [SerializeField] private string AnimalName = "aboba";
-    [SerializeField] private Renderer _renderer;
+    private Renderer _renderer;
 
     private void Start()
     {
@@ -20,7 +20,8 @@ public class PhotoTarget : MonoBehaviour
             var screenPos = CameraManager.CurrentCamera.Camera
                 .WorldToScreenPoint(_renderer.bounds.center, Camera.MonoOrStereoscopicEye.Mono);
 
-            if (screenPos.z < CameraManager.CurrentCamera.Camera.nearClipPlane) 
+            if (screenPos.z < CameraManager.CurrentCamera.Camera.nearClipPlane || 
+                screenPos.z > CameraManager.MaxDistToObject) 
                 return;
 
             var screenCenter = new Vector2(tex.width/2, tex.height/2);

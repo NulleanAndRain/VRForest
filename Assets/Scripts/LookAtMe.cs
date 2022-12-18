@@ -4,9 +4,22 @@ using UnityEngine;
 
 public class LookAtMe : MonoBehaviour
 {
-    public GameObject target;
-    void Update()
+    private GameObject target;
+
+    private void Start()
     {
-        transform.LookAt(target.transform);
+        PlayerLoader.OnPlayersCameraLoaded += (player) => target = player;
+    }
+
+    void FixedUpdate()
+    {
+        if (target != null)
+        {
+            transform.LookAt(target.transform);
+            var angles = transform.eulerAngles;
+            angles.x = 0;
+            angles.z = 0;
+            transform.eulerAngles = angles;
+        }
     }
 }
