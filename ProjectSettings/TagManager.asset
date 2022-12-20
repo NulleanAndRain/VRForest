@@ -3,9 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
+  tags:
   - Points
   - foxSavePoint
-  tags: []
   layers:
   - Default
   - TransparentFX
@@ -13,7 +13,7 @@ TagManager:
   - Player
   - Water
   - UI
-  - 
+  - Animal
   - 
   - 
   - 
