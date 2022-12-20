@@ -2165,6 +2165,36 @@ PrefabInstance:
       propertyPath: m_Name
       value: FoxContainer
       objectReference: {fileID: 0}
+    - target: {fileID: 6451309392334201083, guid: d27798887c8a7f44b8fab951867d8e9d,
+        type: 3}
+      propertyPath: timeToNextPoint
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6451309392334201083, guid: d27798887c8a7f44b8fab951867d8e9d,
+        type: 3}
+      propertyPath: wayPoints.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6451309392334201083, guid: d27798887c8a7f44b8fab951867d8e9d,
+        type: 3}
+      propertyPath: wayPoints.Array.data[0]
+      value: 
+      objectReference: {fileID: 1790882419}
+    - target: {fileID: 6451309392334201083, guid: d27798887c8a7f44b8fab951867d8e9d,
+        type: 3}
+      propertyPath: wayPoints.Array.data[1]
+      value: 
+      objectReference: {fileID: 1638940805}
+    - target: {fileID: 6451309392334201083, guid: d27798887c8a7f44b8fab951867d8e9d,
+        type: 3}
+      propertyPath: wayPoints.Array.data[2]
+      value: 
+      objectReference: {fileID: 196734796}
+    - target: {fileID: 6451309392334201083, guid: d27798887c8a7f44b8fab951867d8e9d,
+        type: 3}
+      propertyPath: wayPoints.Array.data[3]
+      value: 
+      objectReference: {fileID: 1997226756}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d27798887c8a7f44b8fab951867d8e9d, type: 3}
 --- !u!4 &1317898211 stripped
