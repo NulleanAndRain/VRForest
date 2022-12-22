@@ -209,7 +209,7 @@ GameObject:
   - component: {fileID: 1829252925868087865}
   m_Layer: 3
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -303,6 +303,7 @@ MonoBehaviour:
   MenuCanvas: {fileID: 1829252925404935596}
   UiPointer: {fileID: 1829252927325151428}
   menu: {fileID: 1829252925404935591}
+  pointer: {fileID: 0}
 --- !u!1 &1829252925879174441
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,61 +6,89 @@ using UnityEngine.AI;
 public class AnimalMovementManager : MonoBehaviour
 {
     public Animator animator;
-    public bool hasSpecialAnim;
+    public float speed = 2.25f;
     public float timeToNextPoint = 10f;
     public Transform[] wayPoints;
-    public float lineOfSight = 15f;
+    public float radiusOfSight = 15f;
+    public bool hasSpecialRun;
+    public bool aggressive;
 
     private NavMeshAgent _agent;
     private int _wayID;
     private float _localSpeed;
     private Vector3 _oldPosition;
 
-    // Start is called before the first frame update
     void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
-        StartCoroutine("SetAnim");
+        _agent.speed = speed;
+        StartCoroutine("StartRun");
         _oldPosition = transform.position;
+        gameObject.GetComponent<SphereCollider>().radius = radiusOfSight;
     }
 
     private void FixedUpdate()
     {
-        _localSpeed = (transform.position.magnitude - _oldPosition.magnitude) / Time.fixedDeltaTime; //запоминаем скорость;
-        _oldPosition = transform.position; //берем новую "старую" позицию
-        if (_localSpeed != 0) animator.SetBool("IsRun", true);
-        else animator.SetBool("IsRun", false);
-        Debug.Log(_localSpeed + " " + gameObject.name);
+        CheckLocalSpeed();
     }
 
-
-    private void GoRun()
+    private void MovementInTheArea()
     {
         int i = Random.Range(0, wayPoints.Length-1);
         if (i != _wayID)
         {
             _wayID = i;
             var dist = Vector3.Distance(transform.position, wayPoints[_wayID].position);
-            if (dist > 0.1f)
-            {
-                if (hasSpecialAnim) animator.SetBool("IsSpecial", false);
-                
-                _agent.SetDestination(wayPoints[i].position);
-            }
+            if (dist > 0.1f)  _agent.SetDestination(wayPoints[i].position);
         }
-        //else animator.SetBool("IsRun", false);
-        
     }
-    IEnumerator SetAnim()
+    
+    private void CheckLocalSpeed()
+    {
+        _localSpeed = (transform.position.magnitude - _oldPosition.magnitude) / Time.fixedDeltaTime;
+        _oldPosition = transform.position;
+        if (Mathf.Abs(_localSpeed) >= 0.001f)
+        {
+            if (hasSpecialRun && animator.GetBool("IsSpecial")) 
+                    animator.SetBool("IsRun", false);
+            else 
+                animator.SetBool("IsRun", true);
+        }
+        else 
+            animator.SetBool("IsRun", false);
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Player" && radiusOfSight > 0)
+        {
+            if (hasSpecialRun)
+            {
+                animator.SetBool("IsSpecial", true);
+                animator.SetBool("IsRun", false);
+            }
+            var runningDirection = transform.position - other.transform.position;
+            if (!aggressive) 
+                _agent.SetDestination(runningDirection * 1.2f);
+            else 
+                _agent.SetDestination(other.transform.position * 0.8f);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (hasSpecialRun && other.tag == "Player") 
+            animator.SetBool("IsSpecial", false);
+    }
+
+    IEnumerator StartRun()
     {
         while (true)
         {
-            //animator.SetBool("IsRun", false);
-            //yield return new WaitForSeconds(timeToNextPoint/2);
-            //animator.SetBool("IsRun", true);
-            //yield return new WaitForSeconds(0.5f);
-            GoRun();
+            MovementInTheArea();
             yield return new WaitForSeconds(timeToNextPoint);
         }
     }
+
+    
 }
