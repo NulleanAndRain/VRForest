@@ -3,36 +3,46 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class RunAway : StateMachineBehaviour
+public class RunBehaviourFox : StateMachineBehaviour
 {
+    float timer;
+    List<Transform> points = new List<Transform>();
     NavMeshAgent agent;
+
     Transform player;
-    Transform savePoint;
     float DistanseRange = 10;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        timer = 0;
+        Transform pointsObject = GameObject.FindGameObjectWithTag("PointsForFox").transform;
+        foreach (Transform t in pointsObject)
+            points.Add(t);
+
         agent = animator.GetComponent<NavMeshAgent>();
-        agent.speed = 7;
+        agent.SetDestination(points[0].position);
 
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        savePoint = GameObject.FindGameObjectWithTag("foxSavePoint").transform;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        agent.SetDestination(savePoint.position);
+        if (agent.remainingDistance <= agent.stoppingDistance)
+            agent.SetDestination(points[Random.Range(0, points.Count)].position);
+
+        timer += Time.deltaTime;
+        if (timer > 10)
+            animator.SetBool("foxRun", false);
+
         float distance = Vector3.Distance(animator.transform.position, player.position);
-      
-        if (distance > 50)
-            animator.SetBool("foxRunAway", false);
+        if (distance < DistanseRange)
+            animator.SetBool("foxRunAway", true);
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         agent.SetDestination(agent.transform.position);
-        agent.speed = 2;
     }
 }

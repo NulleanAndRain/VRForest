@@ -9,6 +9,13 @@ TagManager:
   - WayPoint
   - Points
   - foxSavePoint
+  - PointsForFox
+  - PointsForCroco
+  - CrocoSavePoint
+  - PointsForTurtle
+  - TurtleSavePoint
+  - croco
+  - Turtle
   layers:
   - Default
   - TransparentFX
