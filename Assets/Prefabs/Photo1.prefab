@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1961909805}
   - component: {fileID: 1961909806}
   - component: {fileID: 3298936492383972580}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,7 +48,7 @@ Camera:
   m_FOVAxisMode: 1
   m_SensorSize: {x: 4.8, y: 3.5}
   m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 4
+  m_FocalLength: 14.95
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -57,7 +57,7 @@ Camera:
     height: 1
   near clip plane: 0.2
   far clip plane: 1000
-  field of view: 47.258755
+  field of view: 13.352961
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 3231456866648047847}
   - component: {fileID: 540639749516032012}
   - component: {fileID: 3669303404514805827}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Screen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -133,7 +133,7 @@ Transform:
   m_GameObject: {fileID: 3704170757059893093}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -0.47800002, y: 0, z: 0.59}
-  m_LocalScale: {x: -0.25964287, y: 1, z: 0.18910998}
+  m_LocalScale: {x: -0.25058964, y: 1.3251, z: 0.25058964}
   m_Children: []
   m_Father: {fileID: 8462831482944199339}
   m_RootOrder: 4
@@ -212,7 +212,7 @@ GameObject:
   - component: {fileID: 8284579426853704698}
   - component: {fileID: 702872329063968446}
   - component: {fileID: 873462676}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Photo1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -349,6 +349,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7639331209684527813, guid: ccfa0c56efcee8447a75f0e6e29b6db7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -7635475611270945815, guid: ccfa0c56efcee8447a75f0e6e29b6db7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: ccfa0c56efcee8447a75f0e6e29b6db7,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -364,11 +374,21 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: cac40a86b407ef64db606116929d2c2b, type: 2}
+    - target: {fileID: -3491894390173606202, guid: ccfa0c56efcee8447a75f0e6e29b6db7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: -3477821731311062464, guid: ccfa0c56efcee8447a75f0e6e29b6db7,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 950df5db7a0ab6644a2c6566c4f9b494, type: 2}
+    - target: {fileID: -3315954688725367957, guid: ccfa0c56efcee8447a75f0e6e29b6db7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: -3315954688725367957, guid: ccfa0c56efcee8447a75f0e6e29b6db7,
         type: 3}
       propertyPath: m_IsActive
@@ -384,11 +404,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: Photo_1
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ccfa0c56efcee8447a75f0e6e29b6db7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418950114621450973, guid: ccfa0c56efcee8447a75f0e6e29b6db7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4603337159546281427, guid: ccfa0c56efcee8447a75f0e6e29b6db7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6517451990525757115, guid: ccfa0c56efcee8447a75f0e6e29b6db7,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: cac40a86b407ef64db606116929d2c2b, type: 2}
+    - target: {fileID: 7910482723422734507, guid: ccfa0c56efcee8447a75f0e6e29b6db7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 9050817489936365762, guid: ccfa0c56efcee8447a75f0e6e29b6db7,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
