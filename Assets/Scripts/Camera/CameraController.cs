@@ -16,6 +16,8 @@ public class CameraController : MonoBehaviour
 
     [SerializeField] private float _focalRangeMin;
     [SerializeField] private float _focalRangeMax;
+
+    [SerializeField] private AudioSource _audio;
     
 
     private float _zoom;
@@ -52,5 +54,10 @@ public class CameraController : MonoBehaviour
         _camera.targetTexture = _defaultTex;
         _screenMat = Instantiate(_screenDefaultMat);
         _screenPlane.material = _screenMat;
+    }
+
+    public void PlayShotSound()
+    {
+        _audio?.Play();
     }
 }

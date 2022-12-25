@@ -66,6 +66,7 @@ public class CameraManager : MonoBehaviour
             RenderTexture currentRT = RenderTexture.active;
             RenderTexture.active = OutputTexture;
             Cam.Render();
+            CurrentCamera.PlayShotSound();
 
             Texture2D Image = new Texture2D(Cam.targetTexture.width, Cam.targetTexture.height, TextureFormat.RGB24, mipCount: -1, linear: true);
             Image.ReadPixels(new Rect(0, 0, Cam.targetTexture.width, Cam.targetTexture.height), 0, 0, false);
