@@ -15081,6 +15081,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 8968330905972654589, guid: 84e4ab151e70c8d4f9bbd14f88597cf0,
+        type: 3}
+      propertyPath: pauseKeyVR
+      value: 4194304
+      objectReference: {fileID: 0}
     - target: {fileID: 8968330905972654590, guid: 84e4ab151e70c8d4f9bbd14f88597cf0,
         type: 3}
       propertyPath: m_RootOrder

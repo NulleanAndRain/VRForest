@@ -18,8 +18,9 @@ public class CameraManager : MonoBehaviour
 
     [Header("ImageSaving (pc only)")]
     [SerializeField] private string _saveFolder = "/_Images";
-    [SerializeField] private string _galleryName = "PhotoHunting";
     private static string SaveFolder => Instance._saveFolder;
+    [Header("ImageSaving (android only)")]
+    [SerializeField] private string _galleryName = "PhotoHunting";
     private const string SaveFormat = ".jpg";
 
     [Header("Camera params")]

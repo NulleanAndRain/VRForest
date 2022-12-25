@@ -21,6 +21,7 @@ public class InputManager : MonoBehaviour
     [Header("Camera")]
     [SerializeField] private float camSensitivity = 10;
     [SerializeField] private float camSensitivityMouse = 10;
+    [SerializeField] private OVRInput.RawButton _camShotBtn = OVRInput.RawButton.LIndexTrigger;
 
     [Tooltip("Limits vertical camera rotation. Prevents the flipping that happens when rotation goes above 90.")]
     [Range(0f, 90f)][SerializeField] float yRotationLimit = 88f;
@@ -128,7 +129,7 @@ public class InputManager : MonoBehaviour
     {
         get
         {
-            return UsePcInput && Input.GetKeyDown(KeyCode.Mouse1) || OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger);
+            return UsePcInput && Input.GetKeyDown(KeyCode.Mouse1) || OVRInput.Get(_instance._camShotBtn);
         }
     }
 
