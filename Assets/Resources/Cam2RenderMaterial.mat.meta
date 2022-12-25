@@ -1,8 +1,15 @@
 fileFormatVersion: 2
-guid: d3391e9d61936a1428f3bfeb3cd31106
+<<<<<<<< HEAD:Assets/Resources/CustomTexMat.mat.meta
+guid: 74b7f01efefb812439ccd1119fa3e16a
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 0
+========
+guid: d0d3e1e9e81d0954b8413507e82bbd3e
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+>>>>>>>> remotes/origin/cleanup:Assets/Resources/Cam2RenderMaterial.mat.meta
   userData: 
   assetBundleName: 
   assetBundleVariant: 

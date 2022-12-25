@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scenes/MainForest/NavMesh-NavMesh.asset.meta
+guid: e6c44814df5cc344583fdde387e6919a
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 23800000
+========
+guid: cca2c701f5d578948a134fe1504eee58
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+>>>>>>>> remotes/origin/cleanup:Assets/Downloads/SkySeries Freebie/FreebieHdri/Materials/CloudedSunGlow4k.mat.meta
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

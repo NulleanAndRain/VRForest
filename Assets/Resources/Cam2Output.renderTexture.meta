@@ -1,8 +1,15 @@
 fileFormatVersion: 2
-guid: 9fa2f0c3b42e94f48b5fe944e1ce6159
+<<<<<<<< HEAD:Assets/Resources/Cam2RenderMaterial.mat.meta
+guid: d3391e9d61936a1428f3bfeb3cd31106
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 0
+========
+guid: 7cfbb37052ed2f648bf8f527c1c43fa9
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 8400000
+>>>>>>>> remotes/origin/cleanup:Assets/Resources/Cam2Output.renderTexture.meta
   userData: 
   assetBundleName: 
   assetBundleVariant: 
