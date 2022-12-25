@@ -144,9 +144,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _activeState: {fileID: 0}
   _interactableFilters: []
+  _data: {fileID: 0}
   _selector: {fileID: 5225959746004463820}
   _rayOrigin: {fileID: 3098293304965358369}
   _maxRayLength: 5
+  _equalDistanceThreshold: 0.001
 --- !u!114 &4526630446865022760
 MonoBehaviour:
   m_ObjectHideFlags: 0
