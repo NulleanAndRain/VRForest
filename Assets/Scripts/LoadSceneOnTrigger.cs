@@ -19,7 +19,7 @@ public class LoadSceneOnTrigger : MonoBehaviour
     [Serializable]
     public enum Scene
     {
-        SampleScene = 0,
-        MainForest = 1
+        MainForest = 0,
+        SampleScene = 1
     }
 }

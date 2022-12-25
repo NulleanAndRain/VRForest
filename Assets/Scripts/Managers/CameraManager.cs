@@ -16,8 +16,9 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private float _maxDistToObject = 25f;
     public static float MaxDistToObject => Instance._maxDistToObject;
 
-    [Header("ImageSaving")]
+    [Header("ImageSaving (pc only)")]
     [SerializeField] private string _saveFolder = "/_Images";
+    [SerializeField] private string _galleryName = "PhotoHunting";
     private static string SaveFolder => Instance._saveFolder;
     private const string SaveFormat = ".jpg";
 
@@ -74,16 +75,16 @@ public class CameraManager : MonoBehaviour
 
             RenderTexture.active = currentRT;
 
-            var Bytes = Image.EncodeToJPG();
+            var bytes = Image.EncodeToJPG();
             Destroy(Image);
 
-            var folder = Application.dataPath + SaveFolder;
-            if (!Directory.Exists(folder))
-                Directory.CreateDirectory(folder);
             var fileName = DateTime.Now.ToString("G")
                 .Replace(" ", "_")
                 .Replace(":", ".");
             var i = 1;
+#if UNITY_EDITOR
+            var folder = Application.dataPath + SaveFolder;
+
             var fileNameNew = fileName;
             while (File.Exists(folder + fileNameNew + SaveFormat))
             {
@@ -91,10 +92,18 @@ public class CameraManager : MonoBehaviour
                 i++;
             }
 
+            if (!Directory.Exists(folder))
+                Directory.CreateDirectory(folder);
+
             var filePath = folder + fileNameNew + SaveFormat;
-            File.WriteAllBytes(filePath, Bytes);
+            File.WriteAllBytes(filePath, bytes);
 
             Debug.Log($"Saved to {filePath}");
+#elif UNITY_ANDROID
+            var fileNameNew = fileName;
+
+            NativeGallery.SaveImageToGallery(bytes, Instance._galleryName, fileNameNew);
+#endif
 
             IsTakingShot = false;
         }
