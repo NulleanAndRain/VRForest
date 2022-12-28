@@ -17,6 +17,16 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    private void Update()
+    {
+        OVRInput.Update();
+    }
+
+    private void FixedUpdate()
+    {
+        OVRInput.FixedUpdate();
+    }
+
     public void LoadForestScene()
     {
         Debug.Log("forest scene open");

@@ -121,7 +121,7 @@ public class InputManager : MonoBehaviour
     {
         get
         {
-            return UsePcInput && Input.GetKeyDown(KeyCode.Mouse0) || OVRInput.Get(OVRInput.Button.SecondaryIndexTrigger);
+            return UsePcInput && Input.GetKeyDown(KeyCode.Mouse0) || OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger);
         }
     }
 
@@ -129,7 +129,7 @@ public class InputManager : MonoBehaviour
     {
         get
         {
-            return UsePcInput && Input.GetKeyDown(KeyCode.Mouse1) || OVRInput.Get(_instance._camShotBtn);
+            return UsePcInput && Input.GetKeyDown(KeyCode.Mouse1) || OVRInput.GetDown(_instance._camShotBtn);
         }
     }
 
