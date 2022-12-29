@@ -88,7 +88,7 @@ public class InputManager : MonoBehaviour
     {
         get
         {
-            var i = OVRInput.Get(OVRInput.RawAxis2D.RThumbstick);
+            var i = OVRInput.Get(OVRInput.RawAxis2D.LThumbstick);
             return new Vector3(-vertical + i.y, 0, horizontal + i.x).normalized;
         }
     }
@@ -102,7 +102,7 @@ public class InputManager : MonoBehaviour
                 rotation.x += Input.GetAxis(xAxis) * _instance.camSensitivityMouse;
                 rotation.y += Input.GetAxis(yAxis) * _instance.camSensitivityMouse;
             }
-            rotation += OVRInput.Get(OVRInput.RawAxis2D.LThumbstick) * _instance.camSensitivity;
+            rotation += OVRInput.Get(OVRInput.RawAxis2D.RThumbstick) * _instance.camSensitivity;
             rotation.y = Mathf.Clamp(rotation.y, -_instance.yRotationLimit, _instance.yRotationLimit);
             return rotation;
         }
@@ -145,12 +145,12 @@ public class InputManager : MonoBehaviour
                 );
             }
             r += OVRInput.Get(_instance._paramUpKeyVR) ? 1 : 
-                    (OVRInput.Get(_instance._paramDownKeyVR) ? -1 : 0
-                );
+                    OVRInput.Get(_instance._paramDownKeyVR) ? -1 : 
+                    0;
 
             if (Mathf.Abs(r) >= Mathf.Epsilon)
             {
-                return Mathf.SmoothDamp(_camParamCurrent, r, ref _camParamCurrent, moveSmooth);
+                return Mathf.SmoothDamp(_camParamCurrent, r, ref _camParamVel, moveSmooth);
             }
             return 0;
         }

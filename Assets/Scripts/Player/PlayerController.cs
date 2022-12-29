@@ -47,11 +47,8 @@ public class PlayerController : MonoBehaviour
     [Header("Camera")]
     [SerializeField] private Transform _camHand;
     [SerializeField] private CameraController _startCamera;
-    private bool _willTakeShot = false;
 
     private static PlayerController _instance;
-
-    private LayerMask _layerMaskDefault;
 
     private void Awake()
     {
@@ -59,7 +56,6 @@ public class PlayerController : MonoBehaviour
         {
             _instance = this;
             DontDestroyOnLoad(gameObject);
-            _layerMaskDefault = LayerMask.GetMask("Default");
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
         else

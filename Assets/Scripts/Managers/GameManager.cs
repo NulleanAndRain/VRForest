@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("forest scene open");
         // open load screen
         // load
-        //SceneManager.LoadScene(_sceneNameForest, LoadSceneMode.Single);
+        SceneManager.LoadScene(_sceneNameForest, LoadSceneMode.Single);
     }
 
     public void ExitGame()
